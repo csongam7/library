@@ -87,6 +87,18 @@
       let newBook = document.createElement("div");
       newBook.classList.add("book");
 
+      const deleteButton = document.createElement("button");
+      deleteButton.innerText = "Delete book";
+      deleteButton.addEventListener("click", function(){
+        for (let i = 0; i < libraryArray.length; i++){
+          if(libraryArray[i].title == book.title){
+            libraryArray.splice(i, 1);
+          }
+        }
+        document.querySelector(".library").removeChild(newBook);
+      })
+      newBook.appendChild(deleteButton);
+
       let title = document.createElement("span");
       title.innerText = book.title;
       newBook.appendChild(title);
@@ -97,7 +109,7 @@
 
       let pageNumText = document.createElement("span");
       pageNumText.innerText = "Page number:";
-      newBook.appendChild(pageNumText)
+      newBook.appendChild(pageNumText);
 
       let pageNum = document.createElement("span");
       pageNum.innerText = book.pageNumber;
