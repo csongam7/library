@@ -11,12 +11,12 @@
       <div class="book">
         <span class="author">Daniel Kahneman</span>
         <span class="title">Gyors & Lassú gondolkodás</span>
-        <span>Page number: <span class="pageNumber"></span></span>
+        <span>Page number: </span> <span class="pageNumber"></span>
         <span class="read">Currently reading</span>
       </div>
     </div>
 
-    <form class="addBook" >
+    <form class="addBook" method="post" >
       <label for="title">Title:</label>
       <input
         type="text"
@@ -24,6 +24,7 @@
         name="title"
         required
         placeholder="Book title"
+        value="llll"
       />
 
       <label for="author">Author:</label>
@@ -33,6 +34,8 @@
         name="author"
         required
         placeholder="Author"
+
+        value="kaka"
       />
 
       <label for="pageNumber">Number of pages:</label>
@@ -42,11 +45,12 @@
         id="pageNumber"
         required
         placeholder="Number of pages"
-      />
+        value=6
+        />
 
       <label for="read">Have you read it?</label>
       <label for="yes">Yes</label>
-      <input type="radio" id="yes" name="read" value="yes" />
+      <input type="radio" id="yes" name="read" value="yes" checked />
       <label for="no">No</label>
       <input type="radio" id="no" name="read" value="no" />
       <label for="reading">Currently reading</label>
@@ -72,46 +76,57 @@
 
     function addBookToLibrary(book) {
       libraryArray.push(book);
-      updateLibrary();
+      updateLibrary(book);
     }
 
-    function updateLibrary() {
-      displayBooks();
+    function updateLibrary(book) {
+      displayBook(book);
     }
 
-    function displayBooks() {
+    function displayBook(book){
+      let newBook = document.createElement("div");
+      newBook.classList.add("book");
+
+      let title = document.createElement("span");
+      title.innerText = book.title;
+      newBook.appendChild(title);
+
+      let author = document.createElement("span");
+      author.innerText = book.author;
+      newBook.appendChild(author);
+
+      let pageNumText = document.createElement("span");
+      pageNumText.innerText = "Page number:";
+      newBook.appendChild(pageNumText)
+
+      let pageNum = document.createElement("span");
+      pageNum.innerText = book.pageNumber;
+      newBook.appendChild(pageNum);
+
+      let read = document.createElement("span");
+      read.innerText = book.read;
+      newBook.appendChild(read);
+
+      document.querySelector(".library").appendChild(newBook);
+    }
+
+    function displayEveryBook() {
       libraryArray.forEach((book) => {
-        let newBook = document.createElement("div");
-        newBook.classList.add("book");
-
-        let title = document.createElement("span");
-        title.innerText = book.title;
-        newBook.appendChild(title);
-
-        let author = document.createElement("span");
-        author.innerText = book.author;
-        newBook.appendChild(author);
-
-        let pageNum = document.createElement("span");
-        pageNum.innerText = book.pageNum;
-        newBook.appendChild(pageNum);
-
-        let read = document.createElement("span");
-        read.innerText = book.read;
-        newBook.appendChild(read);
-
-        document.querySelector(".library").appendChild(newBook);
+        displayNewBook(book)
       });
     }
 
     document.querySelector(".addBook").addEventListener("submit", function() {
-        const author = document.getElementById("#author").value
-        const title = document.getElementById("#title").value;
-        const pageNumber = document.getElementById("#pageNumber").value;
-        const read = document.getElementsByName("read").checked.value;
-        addBookToLibrary(title, author, pageNumber, read);
-      });
+        event.preventDefault();
+        const author = document.getElementById("author").value
+        const title = document.getElementById("title").value;
+        const pageNumber = document.querySelector("#pageNumber").value;
+        const read = document.querySelector('input[name="read"]:checked').value;
+        const newBook = new Book(title, author, pageNumber, read);
+        addBookToLibrary(newBook);
+    });
 
-      /**/
+
+
   </script>
 </html>
