@@ -19,6 +19,7 @@
     <form class="addBook" method="post" >
       <label for="title">Title:</label>
       <input
+        class="input"
         type="text"
         id="title"
         name="title"
@@ -29,6 +30,7 @@
 
       <label for="author">Author:</label>
       <input
+        class="input"
         type="text"
         id="author"
         name="author"
@@ -40,6 +42,7 @@
 
       <label for="pageNumber">Number of pages:</label>
       <input
+        class="input"
         type="number"
         name="pageNumber"
         id="pageNumber"
@@ -50,11 +53,11 @@
 
       <label for="read">Have you read it?</label>
       <label for="yes">Yes</label>
-      <input type="radio" id="yes" name="read" value="yes" checked />
+      <input class="input" type="radio" id="yes" name="read" value="yes" checked />
       <label for="no">No</label>
-      <input type="radio" id="no" name="read" value="no" />
+      <input class="input" type="radio" id="no" name="read" value="no" />
       <label for="reading">Currently reading</label>
-      <input type="radio" id="reading" name="read" value="reading" />
+      <input class="input" type="radio" id="reading" name="read" value="reading" />
 
       <input class="submitButton" type="submit"></input>
     </form>
@@ -136,9 +139,15 @@
         const read = document.querySelector('input[name="read"]:checked').value;
         const newBook = new Book(title, author, pageNumber, read);
         addBookToLibrary(newBook);
+        resetInputFields();
     });
 
-
+    function resetInputFields(){
+      const inputs = document.querySelectorAll('.input');
+      inputs.forEach(function(input){
+        input.value = '';
+      })
+    }
 
   </script>
 </html>
