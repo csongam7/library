@@ -76,6 +76,42 @@
     function displayBook(book){
       let newBook = document.createElement("div");
       newBook.classList.add("book");
+
+      let newBookDataDisplay = document.createElement("div");
+      newBookDataDisplay.classList.add("bookData");
+      newBook.appendChild(newBookDataDisplay);
+      
+
+      let title = document.createElement("span");
+      title.setAttribute("class", "title")
+      title.innerText = book.title;
+      newBookDataDisplay.appendChild(title);
+
+      let author = document.createElement("span");
+      author.setAttribute("class", "author")
+      author.innerText = book.author;
+      newBookDataDisplay.appendChild(author);
+
+      let pageNumText = document.createElement("span");
+      pageNumText.setAttribute("class", "pageNumText");
+      pageNumText.innerText = "Page number:";
+      newBookDataDisplay.appendChild(pageNumText);
+
+      let pageNum = document.createElement("span");
+      pageNum.setAttribute("class", "pageNum");
+      pageNum.innerText = book.pageNumber;
+      newBookDataDisplay.appendChild(pageNum);
+
+      let readTxt = document.createElement("span");
+      readTxt.setAttribute("class", "readTxt")
+      readTxt.innerText = "Already read?:";
+      newBookDataDisplay.appendChild(readTxt);
+      let read = document.createElement("span");
+      read.setAttribute('id', 'readingStatus');
+      read.innerText = book.read;
+      newBookDataDisplay.appendChild(read);
+
+      document.querySelector(".library").appendChild(newBook);
       const changeReadButton = document.createElement("button");
       changeReadButton.innerText = "Change read status";
       changeReadButton.addEventListener("click", function(){
@@ -99,29 +135,6 @@
         document.querySelector(".library").removeChild(newBook);
       })
       newBook.appendChild(deleteButton);
-
-      let title = document.createElement("span");
-      title.innerText = book.title;
-      newBook.appendChild(title);
-
-      let author = document.createElement("span");
-      author.innerText = book.author;
-      newBook.appendChild(author);
-
-      let pageNumText = document.createElement("span");
-      pageNumText.innerText = "Page number:";
-      newBook.appendChild(pageNumText);
-
-      let pageNum = document.createElement("span");
-      pageNum.innerText = book.pageNumber;
-      newBook.appendChild(pageNum);
-
-      let read = document.createElement("span");
-      read.setAttribute('id', 'readingStatus');
-      read.innerText = book.read;
-      newBook.appendChild(read);
-
-      document.querySelector(".library").appendChild(newBook);
     }
 
     function displayEveryBook() {
