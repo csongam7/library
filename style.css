@@ -11,10 +11,11 @@
 .book{
     overflow: auto;
     background-image: url("./images/book.png");
-    background-size: cover;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     color: white;
-    width: 30vw;
-    height: 40vh;
+    width: 10vw;
+    height: 30vh;
     font-size: medium;
     display: grid;
     grid-template-columns: 1fr;
